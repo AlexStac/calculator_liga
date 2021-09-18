@@ -10,13 +10,7 @@ public class Calculator {
 
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
-        try {
-            calculator.calculations();
-        } catch (RuntimeException runtimeException) {
-            System.out.println("Вы ввели некорректное число!");
-            calculator.calculations();
-        }
-
+        exeptionCatcher(calculator);
     }
 
     public String inputValidation() {
@@ -33,6 +27,8 @@ public class Calculator {
     }
 
     public void itemSearch() {
+        numbers.clear();
+        operations.clear();
         String inputString = inputValidation();
         Pattern numbersPattern = Pattern.compile("\\d+");
         Pattern operationsPattern = Pattern.compile("[+\\-*/]");
@@ -77,7 +73,17 @@ public class Calculator {
             numbers.remove(indexMultiply + 1);
             operations.remove(indexMultiply);
         }
-
         System.out.println("Результат: " + numbers.get(0));
+    }
+    public static void exeptionCatcher(Calculator calculator){
+        try {
+            calculator.calculations();
+        } catch (NumberFormatException numberExeption) {
+            System.out.println("Вы ввели некорректное число! Попробуйте переписать выражение");
+            exeptionCatcher(calculator);
+        } catch (ArithmeticException arithmeticException) {
+            System.out.println("Вы допустили арифметическую ошибку!Попробуйте переписать выражение");
+            exeptionCatcher(calculator);
+        }
     }
 }
