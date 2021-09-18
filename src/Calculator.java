@@ -43,8 +43,7 @@ public class Calculator {
         if (numbers.size() == operations.size()) {
             numbers.add(0, 0);
         }
-        System.out.println(numbers);
-        System.out.println(operations);
+
     }
 
     public void calculations() {
